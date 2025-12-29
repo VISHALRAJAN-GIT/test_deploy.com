@@ -34,4 +34,6 @@ app.mount("/", StaticFiles(directory=str(frontend_dir), html=True), name="static
 
 if __name__ == "__main__":
     import uvicorn
-    uvicorn.run(app, host="0.0.0.0", port=8010)
+    # Use the PORT environment variable if available (required by Render/Railway)
+    port = int(os.environ.get("PORT", 8010))
+    uvicorn.run(app, host="0.0.0.0", port=port)
